@@ -1,0 +1,21 @@
+Vagrant::Config.run do |config|
+
+  config.vm.box = "precise64"
+  
+  config.vm.provision :shell do |shell|
+    shell.path = "install.sh"
+  end
+
+  config.vm.define :vm1 do |vm1_config|
+    vm1_config.vm.network :hostonly, "172.16.8.11"
+  end
+
+ config.vm.define :vm2 do |vm2_config|
+   vm2_config.vm.network :hostonly, "172.16.8.12"
+ end
+
+ config.vm.define :vm3 do |vm3_config|
+   vm3_config.vm.network :hostonly, "172.16.8.13"
+ end
+
+end
