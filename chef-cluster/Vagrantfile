@@ -1,0 +1,19 @@
+#
+# $ vagrant box add precise64 http://files.vagrantup.com/precise64.box
+#
+
+boxes = [
+    { :name => "vm1", :ip =>"172.16.8.101" },
+    { :name => "vm2", :ip =>"172.16.8.102" },
+    { :name => "vm3", :ip =>"172.16.8.103" },
+]
+
+Vagrant::Config.run do |config|
+    config.vm.box = "precise64"
+    boxes.each do |opts|
+        config.vm.define opts[:name] do |config|
+            config.vm.network :hostonly, opts[:ip]
+            config.vm.host_name =   "%s.vagrant" % opts[:name].to_s
+        end
+    end
+end
